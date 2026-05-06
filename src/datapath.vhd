@@ -29,7 +29,6 @@ architecture struct of datapath is
             s  : in STD_LOGIC;
             y  : out STD_LOGIC_VECTOR(width-1 downto 0));
     end component;
-
     -- 3-way mux
     component mux3 is
         generic(width: integer);
@@ -40,7 +39,6 @@ architecture struct of datapath is
             s  : in STD_LOGIC_VECTOR(1 downto 0);
             y  : out STD_LOGIC_VECTOR(width-1 downto 0));
     end component;
-
     -- Flip-flop with reset
     component flopr is
         port(
@@ -49,7 +47,6 @@ architecture struct of datapath is
             d     : in STD_LOGIC_VECTOR(31 downto 0);
             q     : out STD_LOGIC_VECTOR(31 downto 0));
     end component;
-
     -- Adder
     component adder is
         port(
@@ -57,7 +54,6 @@ architecture struct of datapath is
             b : in STD_LOGIC_VECTOR(31 downto 0);
             y : out STD_LOGIC_VECTOR(31 downto 0));
     end component;
-
     -- Register file with 2 read ports and 1 write port
     component regfile is
         port(
@@ -70,7 +66,6 @@ architecture struct of datapath is
             rd2 : out STD_LOGIC_VECTOR(31 downto 0)
         );
     end component;
-
     -- Immediate extend unit
     component extend is
         port(
@@ -78,16 +73,16 @@ architecture struct of datapath is
             immsrc : in STD_LOGIC_VECTOR(1 downto 0);
             immext : out STD_LOGIC_VECTOR(31 downto 0));
     end component;
-
     -- ALU
     component alu is
         port(
             a : in STD_LOGIC_VECTOR(31 downto 0);
             b : in STD_LOGIC_VECTOR(31 downto 0);
+            Zero: out STD_LOGIC;
             y : out STD_LOGIC_VECTOR(31 downto 0)
         );
     end component;
-    
+
     -- PC signals
     signal PCNext   : STD_LOGIC_VECTOR(31 downto 0);
     signal PCPlus4  : STD_LOGIC_VECTOR(31 downto 0);
@@ -109,7 +104,6 @@ begin
             s  => PCSrc,
             y  => PCNext
         );
-
     -- PC ff
     pcreg : flopr
         port map(
@@ -118,7 +112,6 @@ begin
             d     => PCNext,
             q     => PC
         );
-
     -- PC plus 4 adder
     pc4add : adder
         port map(
@@ -126,7 +119,6 @@ begin
             b => X"00000004",
             y => PCPlus4
         );
-
     -- Register file
     rf : regfile
         port map(
@@ -138,7 +130,6 @@ begin
             rd1 => SrcA,
             rd2 => WriteData
         );
-
     -- ALU mux
     alumux : mux2
         generic map(32)
@@ -148,15 +139,14 @@ begin
             s  => ALUSrc,
             y  => SrcB
         );
-
     -- ALU
     alumain : alu
         port map(
             a => SrcA,
             b => SrcB,
+            Zero => Zero,
             y => ALUResult
         );
-
     -- Extend unit
     ext : extend
         port map(
@@ -164,7 +154,6 @@ begin
             immsrc => ImmSrc,
             immext => ImmExt
         );
-    
     -- PC target adder
     pctargetadd : adder
         port map(
@@ -172,7 +161,6 @@ begin
             b => ImmExt,
             y => PCTarget
         );
-
     -- Result mux
     resultmux : mux3
         generic map(32)
