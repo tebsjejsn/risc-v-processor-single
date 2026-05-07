@@ -7,7 +7,7 @@ entity datapath is
         reset      : in STD_LOGIC;
         instr      : in STD_LOGIC_VECTOR(31 downto 0);
         ReadData   : in STD_LOGIC_VECTOR(31 downto 0);
-        PCSrc      : in STD_LOGIC;
+        PCSrc      : in STD_LOGIC_VECTOR(1 downto 0);
         RegWrite   : in STD_LOGIC;
         ImmSrc     : in STD_LOGIC_VECTOR(1 downto 0);
         ALUSrc     : in STD_LOGIC;
@@ -16,7 +16,8 @@ entity datapath is
         ALUResult  : buffer STD_LOGIC_VECTOR(31 downto 0);
         WriteData  : buffer STD_LOGIC_VECTOR(31 downto 0);
         PC         : buffer STD_LOGIC_VECTOR(31 downto 0);
-        Zero       : out STD_LOGIC);
+        Zero       : out STD_LOGIC
+    );
 end entity datapath;
 
 architecture struct of datapath is
@@ -96,11 +97,12 @@ architecture struct of datapath is
     signal Result   : STD_LOGIC_VECTOR(31 downto 0);
 begin
     -- PC mux
-    pcmux : mux2 
+    pcmux : mux3
         generic map(32) 
         port map(
             d0 => PCPlus4,
             d1 => PCTarget,
+            d2 => ALUResult,
             s  => PCSrc,
             y  => PCNext
         );
