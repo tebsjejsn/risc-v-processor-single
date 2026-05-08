@@ -27,7 +27,7 @@ begin
                     -- add/sub
                     when "000" =>
                         -- add
-                        if (funct7 = (others => '0')) then
+                        if (funct7 = "0000000") then
                             ALUControl <= "000";
                         -- sub
                         else
@@ -44,16 +44,42 @@ begin
                         ALUControl <= "111";
                     -- slt
                     when "010" =>
-                        
+                        ALUControl <= "010";
+                    when others =>
+                        ALUControl <= "000";
                 end case;
             -- i-type
             when "0010011" =>
+                case funct3 is
+                    -- addi
+                    when "000" =>
+                        ALUControl <= "000";
+                    -- xori
+                    when "100" =>
+                        ALUControl <= "100";
+                    -- ori
+                    when "110" =>
+                        ALUControl <= "110";
+                    -- andi
+                    when "111" =>
+                        ALUControl <= "111";
+                    -- slti
+                    when "010" =>
+                        ALUControl <= "010";
+                    when others =>
+                        ALUControl <= "000";
+                end case;
             -- b-type
             when "1100011" =>
+                ALUControl <= "001";
             -- jal
             when "1101111" =>
+                ALUControl <= "000";
             -- jalr
             when "1100111" =>
+                ALUControl <= "000";
+            when others => 
+                ALUControl <= "000";
         end case;
     end process;
 end architecture behavioural;
