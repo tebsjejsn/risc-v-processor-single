@@ -58,6 +58,7 @@ architecture struct of datapath is
     -- Register file with 2 read ports and 1 write port
     component regfile is
         port(
+            clk : in STD_LOGIC;
             a1  : in STD_LOGIC_VECTOR(4 downto 0);
             a2  : in STD_LOGIC_VECTOR(4 downto 0);
             a3  : in STD_LOGIC_VECTOR(4 downto 0);
@@ -125,6 +126,7 @@ begin
     -- Register file
     rf : regfile
         port map(
+            clk => clk,
             a1  => instr(19 downto 15),
             a2  => instr(24 downto 20),
             a3  => instr(11 downto 7),

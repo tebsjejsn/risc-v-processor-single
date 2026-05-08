@@ -10,7 +10,6 @@ entity main_dec is
         RegWrite   : out STD_LOGIC;
         ImmSrc     : out STD_LOGIC_VECTOR(1 downto 0);
         ALUSrc     : out STD_LOGIC;
-        ALUControl : out STD_LOGIC_VECTOR(2 downto 0);
         MemWrite   : out STD_LOGIC;
         ResultSrc  : out STD_LOGIC_VECTOR(1 downto 0)
     );
@@ -60,6 +59,8 @@ begin
                     -- bne
                     when "001" =>
                         PCSrc <= '0' & (not Zero);
+                    when others =>
+                        PCSrc <= "00";
                 end case;
             -- r-type instructions (add, sub, xor, or, and, slt)
             when "0110011" => 
@@ -85,6 +86,13 @@ begin
                 ResultSrc <= "10";
                 PCSrc <= "10";
                 ALUSrc <= '1';
+            when others =>
+                RegWrite <= '0';
+                ImmSrc <= "00";
+                MemWrite <= '0';
+                ResultSrc <= "00";
+                PCSrc <= "00";
+                ALUSrc <= '0';
         end case;
     end process;
 

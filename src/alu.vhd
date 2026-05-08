@@ -7,6 +7,7 @@ entity alu is
         SrcA       : in STD_LOGIC_VECTOR(31 downto 0);
         SrcB       : in STD_LOGIC_VECTOR(31 downto 0);
         ALUControl : in STD_LOGIC_VECTOR(2 downto 0);
+        Zero       : out STD_LOGIC;
         ALUResult  : out STD_LOGIC_VECTOR(31 downto 0)
     );
 end entity alu;
@@ -27,7 +28,7 @@ begin
             when "010" =>
                 ALUResult <= (others => '0');
 
-                if (SrcA < SrcB) then
+                if (signed(SrcA) < signed(SrcB)) then
                     ALUResult(0) <= '1';
                 end if;
             when "100" =>
@@ -39,5 +40,11 @@ begin
             when others =>
                 ALUResult <= (others => '0');
         end case;
+
+        if ((A - B) = 0) then
+            Zero <= '1';
+        else
+            Zero <= '0';
+        end if;
     end process;
 end architecture behavioural;
