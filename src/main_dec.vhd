@@ -3,21 +3,20 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity main_dec is
     port(
-        opcode: in STD_LOGIC_VECTOR(6 downto 0);
-        funct3: in STD_LOGIC_VECTOR(2 downto 0);
-        Zero: in STD_LOGIC;
-        PCSrc: out STD_LOGIC_VECTOR(1 downto 0);
-        RegWrite: out STD_LOGIC;
-        ImmSrc: out STD_LOGIC_VECTOR(1 downto 0);
-        ALUSrc: out STD_LOGIC;
-        ALUControl: out STD_LOGIC_VECTOR(2 downto 0);
-        MemWrite: out STD_LOGIC;
-        ResultSrc: out STD_LOGIC_VECTOR(1 downto 0)
+        opcode     : in STD_LOGIC_VECTOR(6 downto 0);
+        funct3     : in STD_LOGIC_VECTOR(2 downto 0);
+        Zero       : in STD_LOGIC;
+        PCSrc      : out STD_LOGIC_VECTOR(1 downto 0);
+        RegWrite   : out STD_LOGIC;
+        ImmSrc     : out STD_LOGIC_VECTOR(1 downto 0);
+        ALUSrc     : out STD_LOGIC;
+        ALUControl : out STD_LOGIC_VECTOR(2 downto 0);
+        MemWrite   : out STD_LOGIC;
+        ResultSrc  : out STD_LOGIC_VECTOR(1 downto 0)
     );
 end entity main_dec;
 
 architecture behavioural of main_dec is
-    signal Branch: STD_LOGIC;
 begin
     process(all)
     begin
@@ -88,4 +87,5 @@ begin
                 ALUSrc <= '1';
         end case;
     end process;
+
 end architecture behavioural;

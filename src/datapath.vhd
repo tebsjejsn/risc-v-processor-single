@@ -77,10 +77,11 @@ architecture struct of datapath is
     -- ALU
     component alu is
         port(
-            a : in STD_LOGIC_VECTOR(31 downto 0);
-            b : in STD_LOGIC_VECTOR(31 downto 0);
-            Zero: out STD_LOGIC;
-            y : out STD_LOGIC_VECTOR(31 downto 0)
+            srca       : in STD_LOGIC_VECTOR(31 downto 0);
+            srcb       : in STD_LOGIC_VECTOR(31 downto 0);
+            alucontrol : in STD_LOGIC_VECTOR(2 downto 0);
+            Zero       : out STD_LOGIC;
+            aluresult  : out STD_LOGIC_VECTOR(31 downto 0)
         );
     end component;
 
@@ -144,10 +145,11 @@ begin
     -- ALU
     alumain : alu
         port map(
-            a => SrcA,
-            b => SrcB,
+            srca => SrcA,
+            srcb => SrcB,
+            alucontrol => ALUControl,
             Zero => Zero,
-            y => ALUResult
+            aluresult => ALUResult
         );
     -- Extend unit
     ext : extend

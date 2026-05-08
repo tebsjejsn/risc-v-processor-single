@@ -1,0 +1,43 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity alu is
+    port(
+        SrcA       : in STD_LOGIC_VECTOR(31 downto 0);
+        SrcB       : in STD_LOGIC_VECTOR(31 downto 0);
+        ALUControl : in STD_LOGIC_VECTOR(2 downto 0);
+        ALUResult  : out STD_LOGIC_VECTOR(31 downto 0)
+    );
+end entity alu;
+
+architecture behavioural of alu is
+    signal A : unsigned(31 downto 0);
+    signal B: unsigned(31 downto 0);
+begin
+    A <= unsigned(SrcA);
+    B <= unsigned(SrcB);
+
+    process(all) begin
+        case ALUControl is
+            when "000" =>
+                ALUResult <= STD_LOGIC_VECTOR(A + B);
+            when "001" =>
+                ALUResult <= STD_LOGIC_VECTOR(A - B);
+            when "010" =>
+                ALUResult <= (others => '0');
+
+                if (SrcA < SrcB) then
+                    ALUResult(0) <= '1';
+                end if;
+            when "100" =>
+                ALUResult <= SrcA xor SrcB;
+            when "110" => 
+                ALUResult <= SrcA or SrcB;
+            when "111" => 
+                ALUResult <= SrcA and SrcB;
+            when others =>
+                ALUResult <= (others => '0');
+        end case;
+    end process;
+end architecture behavioural;
