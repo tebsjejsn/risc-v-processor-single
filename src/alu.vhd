@@ -13,11 +13,11 @@ entity alu is
 end entity alu;
 
 architecture behavioural of alu is
-    signal A : unsigned(31 downto 0);
-    signal B: unsigned(31 downto 0);
+    signal A : signed(31 downto 0);
+    signal B: signed(31 downto 0);
 begin
-    A <= unsigned(SrcA);
-    B <= unsigned(SrcB);
+    A <= signed(SrcA);
+    B <= signed(SrcB);
 
     process(all) begin
         case ALUControl is

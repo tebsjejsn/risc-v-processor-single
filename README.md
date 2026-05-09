@@ -3,7 +3,13 @@
 ## Overview
 A single cycle processor implemented in VHDL, capable of executing 17 32-bit RISC-V instructions. 
 
-## Instruction Set
+## Installation
+
+## Running the Project
+
+## Features
+
+### Instruction Set
 |  Type  |              Instructions             |
 |--------|---------------------------------------|
 | R-type | ADD, SUB, AND, OR, XOR, SLT           |
@@ -12,12 +18,8 @@ A single cycle processor implemented in VHDL, capable of executing 17 32-bit RIS
 | B-type | BEQ, BNE                              |
 | J-type | JAL                                   |
 
-## Datapath Diagram
+### Datapath Diagram
 ![Datapath Diagram](images/datapath.png)
-
-## Installation
-
-## Running the Project
 
 ## Built With
 
