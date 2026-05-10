@@ -29,9 +29,8 @@ cd risc-v-processor-single
 ### Processor Capabilities
 - Integer arithmetic
 - Memory access
-- Control logic
+- Branching and jumps
 - Immediate instructions
-- Turing complete
 
 ### Instruction Set
 |  Type  |              Instructions             |
