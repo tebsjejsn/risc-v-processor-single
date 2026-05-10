@@ -5,9 +5,33 @@ A single cycle processor implemented in VHDL, capable of executing 17 32-bit RIS
 
 ## Installation
 
+### 1. Prerequisites
+- ModelSim or any VHDL-compatible simulator
+
+### 2. Clone the Repository
+```bash
+git clone https://github.com/tebsjejsn/risc-v-processor-single.git
+cd risc-v-processor-single
+```
+
 ## Running the Project
 
+### 1. Open in ModelSim
+- Create a new project and add all `.vhd` source files from the `src/` directory
+- Compile in dependency order (e.g. ALU → datapath → top-level)
+
+### 2. Run the Simulation
+- Set the testbench as the top-level module
+- Run the simulation and inspect the waveform
+
 ## Features
+
+### Processor Capabilities
+- Integer arithmetic
+- Memory access
+- Control logic
+- Immediate instructions
+- Turing complete
 
 ### Instruction Set
 |  Type  |              Instructions             |
@@ -22,7 +46,10 @@ A single cycle processor implemented in VHDL, capable of executing 17 32-bit RIS
 ![Datapath Diagram](images/datapath.png)
 
 ## Built With
+- VHDL (VHSIC Hardware Description Language)
+- ModelSim (HDL Simulation Environment)
 
 ## Test
 
 ## License
+Distributed under the MIT License. See `LICENSE` for more information.
