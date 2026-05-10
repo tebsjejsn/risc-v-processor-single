@@ -9,7 +9,7 @@ entity datapath is
         ReadData   : in STD_LOGIC_VECTOR(31 downto 0);
         PCSrc      : in STD_LOGIC_VECTOR(1 downto 0);
         RegWrite   : in STD_LOGIC;
-        ImmSrc     : in STD_LOGIC_VECTOR(1 downto 0);
+        ImmType    : in STD_LOGIC_VECTOR(2 downto 0);
         ALUSrc     : in STD_LOGIC;
         ALUControl : in STD_LOGIC_VECTOR(2 downto 0);
         ResultSrc  : in STD_LOGIC_VECTOR(1 downto 0);
@@ -71,9 +71,10 @@ architecture struct of datapath is
     -- Immediate extend unit
     component extend is
         port(
-            instr  : in STD_LOGIC_VECTOR(31 downto 7);
-            immsrc : in STD_LOGIC_VECTOR(1 downto 0);
-            immext : out STD_LOGIC_VECTOR(31 downto 0));
+            instr   : in STD_LOGIC_VECTOR(31 downto 7);
+            immtype : in STD_LOGIC_VECTOR(2 downto 0);
+            immext  : out STD_LOGIC_VECTOR(31 downto 0)
+        );
     end component;
     -- ALU
     component alu is
@@ -156,9 +157,9 @@ begin
     -- Extend unit
     ext : extend
         port map(
-            instr  => instr(31 downto 7),
-            immsrc => ImmSrc,
-            immext => ImmExt
+            instr   => instr(31 downto 7),
+            immtype => ImmType,
+            immext  => ImmExt
         );
     -- PC target adder
     pctargetadd : adder
