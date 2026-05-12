@@ -59,7 +59,6 @@ architecture struct of riscvsingle is
     signal PCSrc      : STD_LOGIC_VECTOR(1 downto 0);
     signal RegWrite   : STD_LOGIC;
     signal ImmType    : STD_LOGIC_VECTOR(2 downto 0);
-    signal MemW       : STD_LOGIC;
     signal ALUSrc     : STD_LOGIC;
     signal ALUControl : STD_LOGIC_VECTOR(2 downto 0);
     signal Zero       : STD_LOGIC;
@@ -89,8 +88,9 @@ begin
             funct3 => instr(14 downto 12),
             Zero => Zero,
             PCSrc => PCSrc,
+            ALUSrc => ALUSrc,
             RegWrite => RegWrite,
-            MemWrite => MemW,
+            MemWrite => MemWrite,
             ResultSrc => ResultSrc,
             ImmType => ImmType
         );
