@@ -66,40 +66,40 @@ architecture struct of riscvsingle is
 begin
     dp : datapath
         port map(
-            clk => clk,
-            reset => reset,
-            instr => instr,
-            ReadData => ReadData,
-            PCSrc => PCSrc,
-            RegWrite => RegWrite,
-            ImmType => ImmType,
-            ALUSrc => ALUSrc,
+            clk        => clk,
+            reset      => reset,
+            instr      => instr,
+            ReadData   => ReadData,
+            PCSrc      => PCSrc,
+            RegWrite   => RegWrite,
+            ImmType    => ImmType,
+            ALUSrc     => ALUSrc,
             ALUControl => ALUControl,
-            ResultSrc => ResultSrc,
-            ALUResult => ALUResult,
-            WriteData => WriteData,
-            PC => PC,
-            Zero => Zero
+            ResultSrc  => ResultSrc,
+            ALUResult  => ALUResult,
+            WriteData  => WriteData,
+            PC         => PC,
+            Zero       => Zero
          );
 
     m_dec : main_dec
         port map(
-            opcode => instr(6 downto 0),
-            funct3 => instr(14 downto 12),
-            Zero => Zero,
-            PCSrc => PCSrc,
-            ALUSrc => ALUSrc,
-            RegWrite => RegWrite,
-            MemWrite => MemWrite,
+            opcode    => instr(6 downto 0),
+            funct3    => instr(14 downto 12),
+            Zero      => Zero,
+            PCSrc     => PCSrc,
+            ALUSrc    => ALUSrc,
+            RegWrite  => RegWrite,
+            MemWrite  => MemWrite,
             ResultSrc => ResultSrc,
-            ImmType => ImmType
+            ImmType   => ImmType
         );
 
     a_dec : alu_dec
         port map(
-            funct3 => instr(14 downto 12),
-            funct7 => instr(31 downto 25),
-            opcode => instr(6 downto 0),
+            funct3     => instr(14 downto 12),
+            funct7     => instr(31 downto 25),
+            opcode     => instr(6 downto 0),
             ALUControl => ALUControl
         );
 end architecture struct;
