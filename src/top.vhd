@@ -3,11 +3,11 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity top is
     port(
-        clk : in STD_LOGIC;
-        reset : in STD_LOGIC;
+        clk       : in STD_LOGIC;
+        reset     : in STD_LOGIC;
         WriteData : buffer STD_LOGIC_VECTOR(31 downto 0);
-        dataAdr : buffer STD_LOGIC_VECTOR(31 downto 0);
-        MemWrite : buffer STD_LOGIC
+        dataAdr   : buffer STD_LOGIC_VECTOR(31 downto 0);
+        MemWrite  : buffer STD_LOGIC
     );
 end entity top;
 
